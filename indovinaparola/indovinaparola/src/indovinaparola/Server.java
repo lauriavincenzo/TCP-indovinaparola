@@ -8,18 +8,33 @@ package indovinaparola;
  *
  * @author sireci_edoardo
  */
+//user a cui mandi il messaggio, #messaggio, vedi a capo:
+//user2#ciao
+//messaggio indirizzato a user2
 
+import static indovinaparola.Indovina.parole;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Server {
     static List<ClientHandler> clients;
     ServerSocket serverSocket;
     static int numOfUsers = 0;
     Socket socket;
+    static String p="";
+    
     
     public Server(){
         clients = new ArrayList<>();
@@ -28,16 +43,36 @@ public class Server {
         }catch(IOException ex){
             log("Server : " + ex.getMessage());
         }
+     
     }
+        
     
     public static void main(String[] args){
         Server server = new Server();
         server.watiConnection();
     }
+    public static String aprifile() {
+           String path="";
+           File file=new File(path);
+           List<String> nome=new ArrayList();
+           
+           try(BufferedReader br= new BufferedReader(new FileReader(file))){
+               String line;
+               while((line= br.readLine()) != null){
+                nome.add(line.trim());   
+               }
+           }catch(IOException e){
+               e.printStackTrace();
+           }
+           
+           int num=(int)(Math.random()*(nome.size()));
+           return nome.get(num);
+    }
     
     private void watiConnection(){
         log("Server Running...");
-        
+        p=aprifile();
+        System.out.println(p);
         while(true){
             try{
                 socket = serverSocket.accept();
