@@ -12,7 +12,6 @@ package indovinaparola;
 //user2#ciao
 //messaggio indirizzato a user2
 
-import static indovinaparola.Indovina.parole;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,6 +33,7 @@ public class Server {
     static int numOfUsers = 0;
     Socket socket;
     static String p="";
+    Indovina indovina;
     
     
     public Server(){
@@ -43,7 +43,9 @@ public class Server {
         }catch(IOException ex){
             log("Server : " + ex.getMessage());
         }
-     
+        
+        indovina=new Indovina();
+        
     }
         
     
@@ -51,27 +53,27 @@ public class Server {
         Server server = new Server();
         server.watiConnection();
     }
-    public static String aprifile() {
-           String path="";
-           File file=new File(path);
-           List<String> nome=new ArrayList();
-           
-           try(BufferedReader br= new BufferedReader(new FileReader(file))){
-               String line;
-               while((line= br.readLine()) != null){
-                nome.add(line.trim());   
-               }
-           }catch(IOException e){
-               e.printStackTrace();
-           }
-           
-           int num=(int)(Math.random()*(nome.size()));
-           return nome.get(num);
-    }
+//    public static String aprifile() {
+//           String path="";
+//           File file=new File(path);
+//           List<String> nome=new ArrayList();
+//           
+//           try(BufferedReader br= new BufferedReader(new FileReader(file))){
+//               String line;
+//               while((line= br.readLine()) != null){
+//                nome.add(line.trim());   
+//               }
+//           }catch(IOException e){
+//               e.printStackTrace();
+//           }
+//           
+//           int num=(int)(Math.random()*(nome.size()));
+//           return nome.get(num);
+//    }
     
     private void watiConnection(){
         log("Server Running...");
-        p=aprifile();
+//        p=aprifile();
         System.out.println(p);
         while(true){
             try{

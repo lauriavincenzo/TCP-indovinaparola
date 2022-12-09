@@ -63,14 +63,17 @@ public class ClientHandler implements Runnable{
     
     private void forwardToClient(String received){
         // username # message
-        StringTokenizer tokenizer = new StringTokenizer(received, "#");
-        String recipient = tokenizer.nextToken().trim();
-        String message = tokenizer.nextToken().trim();
-        
+//        StringTokenizer tokenizer = new StringTokenizer(received, "#");
+//        String recipient = tokenizer.nextToken().trim();
+//        String message = tokenizer.nextToken().trim();
+
+        //pTemporanea è la parola attuale in gioco, che aggiorni man mano nel gioco
+        //riempi parola è il metodo per sostituire gli * ai caratteri inseriti
+        //pTemporanea=indovina.riempiParola(received);
         for(ClientHandler c : Server.getClients()){
-            if(c.isLosggedIn && c.name.equals(recipient)){
-                write(c.output,  recipient + " : " + message);
-                log(name + " --> " + recipient + " : " + message);
+            if(c.isLosggedIn){
+                write(c.output,""/*pTemporanea*/);
+                log(received);
                 break;
             }
         }
