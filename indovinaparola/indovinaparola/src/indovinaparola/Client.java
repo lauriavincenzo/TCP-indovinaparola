@@ -17,6 +17,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class Client {
 
   Scanner scan ;
@@ -60,7 +62,6 @@ public class Client {
                     }catch(IOException ex){
                         log("readMessageThread : " + ex.getMessage());
                     }
-                    
                 }
             }
         });
@@ -87,12 +88,8 @@ public class Client {
     }
     private void log(String msg){
         //System.out.println(msg);
-        if(!msg.contains("Your name :")&&!msg.contains("Client attivi :"))
-        {
-            Date date2 = new Date(System.currentTimeMillis());
-            System.out.println(date2+"--> "+msg);
-        }else{
+        
             System.out.println(msg);
-        }
+        
     }
 }

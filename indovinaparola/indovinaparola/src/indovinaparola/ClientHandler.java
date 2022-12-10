@@ -20,15 +20,24 @@ public class ClientHandler implements Runnable{
     final Scanner scan;
     String name;
     boolean isLosggedIn;
+    String ptemporanea="";
+    Indovina indovina;
     
     private DataInputStream input;
     private DataOutputStream output;
     
-    public ClientHandler(Socket socket, String name){
+    public ClientHandler(Socket socket, String name,Indovina indovina){
         this.socket = socket;
         scan = new Scanner(System.in);
         this.name = name;
+        this.indovina=indovina;
         isLosggedIn = true;
+        String provvisorio=indovina.getParola();
+        for(int i=0;i<provvisorio.length();i++)
+        {
+            ptemporanea+="*";
+        }
+        
         
         try{
             input = new DataInputStream(socket.getInputStream());
@@ -67,14 +76,13 @@ public class ClientHandler implements Runnable{
 //        String recipient = tokenizer.nextToken().trim();
 //        String message = tokenizer.nextToken().trim();
 
-        //pTemporanea è la parola attuale in gioco, che aggiorni man mano nel gioco
+        //ptemporanea è la parola attuale in gioco, che aggiorni man mano nel gioco
         //riempi parola è il metodo per sostituire gli * ai caratteri inseriti
-        //pTemporanea=indovina.riempiParola(received);
+        ptemporanea=indovina.controllaparola(ptemporanea, received);
         for(ClientHandler c : Server.getClients()){
             if(c.isLosggedIn){
-                write(c.output,""/*pTemporanea*/);
+                write(c.output,ptemporanea);
                 log(received);
-                break;
             }
         }
         

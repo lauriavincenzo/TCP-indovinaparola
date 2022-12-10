@@ -44,6 +44,7 @@ public class Server {
             log("Server : " + ex.getMessage());
         }
         
+        
         indovina=new Indovina();
         
     }
@@ -53,23 +54,6 @@ public class Server {
         Server server = new Server();
         server.watiConnection();
     }
-//    public static String aprifile() {
-//           String path="";
-//           File file=new File(path);
-//           List<String> nome=new ArrayList();
-//           
-//           try(BufferedReader br= new BufferedReader(new FileReader(file))){
-//               String line;
-//               while((line= br.readLine()) != null){
-//                nome.add(line.trim());   
-//               }
-//           }catch(IOException e){
-//               e.printStackTrace();
-//           }
-//           
-//           int num=(int)(Math.random()*(nome.size()));
-//           return nome.get(num);
-//    }
     
     private void watiConnection(){
         log("Server Running...");
@@ -85,7 +69,7 @@ public class Server {
             log("Client accepted : " + socket.getInetAddress());
             numOfUsers++;
             
-            ClientHandler handler = new ClientHandler(socket, "user" + numOfUsers);
+            ClientHandler handler = new ClientHandler(socket, "user" + numOfUsers,indovina);
             
             Thread thread = new Thread(handler);
             addClient(handler);
