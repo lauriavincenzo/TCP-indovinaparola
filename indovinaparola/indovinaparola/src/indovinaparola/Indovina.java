@@ -34,7 +34,7 @@ public class Indovina {
             System.out.println("try");
             br = new BufferedReader(new FileReader(pathToFile));
             Stream<String> lines = br.lines();
-            parola = lines.skip(util.Random(0, 7)).findFirst().get();
+            parola = lines.skip(util.Random(0, 483)).findFirst().get();
         } catch (FileNotFoundException ex) {
             System.out.println("catch");
             java.util.logging.Logger.getLogger(Indovina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -56,9 +56,15 @@ public class Indovina {
             if(parola.contains(parolainserita))
             {
                 System.out.println("bravo, hai indovinato una lettera");
+                //if per controllare se il client indovina la parola carattere per carattere
+                if(parola.equals(attuale))
+                {
+                System.out.println("Hai vinto");
+                attuale=parola;
+                }
                 for(int i=0;i<parola.length();i++)
                 {
-                    if(parola.charAt(i)==carattere)
+                   if(parola.charAt(i)==carattere)
                     {
                         //scrive parola attuale fino al carattere uguale che ha inserito client
                         //scrive carattere al posto giusto
@@ -75,6 +81,11 @@ public class Indovina {
                System.out.println("Hai vinto");
                attuale=parola;
            }
+        }
+        if(parolainserita.equals("jolly"))
+        {
+            System.out.println("Hai vinto utilizzando il jolly, la parola da indovinare era "+parola);
+//               attuale=parola;
         }
         return attuale;
     }
