@@ -22,7 +22,6 @@ punto
 lavoro
 stato
 caso
-città
 guerra
 strada
 figlio
@@ -103,8 +102,6 @@ sviluppo
 sorella
 effetto
 giardino
-attività
-volontà
 volto
 base
 carattere
@@ -128,7 +125,7 @@ istituto
 quadro
 attenzione
 autore
-difficoltà
+difficolta
 passione
 commissione
 dito
@@ -194,7 +191,7 @@ fine
 forma
 resto
 popolo
-società
+societa
 studio
 legge
 libro
@@ -204,7 +201,7 @@ luogo
 condizione
 professore
 marito
-verità
+verita
 segno
 diritto
 lettera
@@ -223,11 +220,11 @@ rispetto
 scena
 don
 oggetto
-possibilità
+possibilita
 mamma
 presenza
 teatro
-caffè
+caffe
 principio
 termine
 lingua
@@ -235,14 +232,14 @@ pezzo
 capello
 regione
 monte
-università
+universita
 treno
 inverno
 nazione
 pagina
 scopo
 compagno
-necessità
+necessita
 potere
 musica
 dottore
@@ -261,7 +258,7 @@ materia
 scala
 maniera
 arma
-autorità
+autorita
 gamba
 patria
 albergo
@@ -304,10 +301,10 @@ ufficiale
 crisi
 cucina
 gatto
-pietà
+pieta
 territorio
 attimo
-civiltà
+civilta
 contatto
 errore
 fretta
@@ -369,7 +366,7 @@ giro
 automobile
 atto
 aspetto
-età
+eta
 fortuna
 oro
 partito
@@ -380,7 +377,7 @@ tratto
 settimana
 notizia
 fratello
-realtà
+realta
 industria
 piacere
 maestro
@@ -395,8 +392,8 @@ pubblico
 sede
 affare
 bene
-metà
-papà
+meta
+papa
 fiume
 lotta
 mercato
@@ -434,7 +431,7 @@ metro
 collo
 cura
 disposizione
-Domenica
+domenica
 giovanotto
 poeta
 stagione
@@ -446,7 +443,7 @@ poesia
 fiducia
 filo
 folla
-qualità
+qualita
 roba
 conoscenza
 favore

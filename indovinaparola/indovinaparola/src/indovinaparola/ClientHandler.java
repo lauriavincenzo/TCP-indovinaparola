@@ -53,9 +53,10 @@ public class ClientHandler implements Runnable{
         String tmp="";
         write(output, "Your name : " + name);
         for(ClientHandler c : Server.getClients()){
-            tmp+=c.name+",";
+            //virgola al posto dei due spazi
+            tmp+=c.name+"   ";
         }
-        write(output, "Client attivi : " + tmp);
+        write(output, "Client attivi : " + tmp+"\n"+"Premi invio per iniziare...");
         while(true){
             received = read();
             if(received.equalsIgnoreCase(Constants.LOGOUT)){
@@ -70,19 +71,27 @@ public class ClientHandler implements Runnable{
         closeStreams();
     }
     
-    private void forwardToClient(String received){
+    private void forwardToClient(String parolainserita){
         // username # message
 //        StringTokenizer tokenizer = new StringTokenizer(received, "#");
 //        String recipient = tokenizer.nextToken().trim();
 //        String message = tokenizer.nextToken().trim();
 
         //ptemporanea è la parola attuale in gioco, che aggiorni man mano nel gioco
-        //riempi parola è il metodo per sostituire gli * ai caratteri inseriti
-        ptemporanea=indovina.controllaparola(ptemporanea, received);
+        //controllaparola è il metodo per sostituire gli * ai caratteri inseriti
+        ptemporanea=indovina.controllaparola(ptemporanea, parolainserita);
+        if(!(ptemporanea.contains("*"))&&(!(parolainserita.equals("jolly"))))
+        {            
+            ptemporanea+=" era la parola da indovinare. Hai vinto utilizzando "+indovina.getContamosse()+" mosse";
+        }else if(parolainserita.equals("jolly")){
+            ptemporanea+=" era la parola da indovinare.Hai vinto utilizzando il jolly ";
+        }
+        
+        
         for(ClientHandler c : Server.getClients()){
             if(c.isLosggedIn){
                 write(c.output,ptemporanea);
-                log(received);
+               log(parolainserita);
             }
         }
         

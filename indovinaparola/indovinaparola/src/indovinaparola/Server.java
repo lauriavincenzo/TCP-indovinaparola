@@ -42,8 +42,7 @@ public class Server {
             serverSocket = new ServerSocket(Constants.PORT);
         }catch(IOException ex){
             log("Server : " + ex.getMessage());
-        }
-        
+        }      
         
         indovina=new Indovina();
         
