@@ -1,0 +1,10 @@
+alfredo,3
+user21,3
+user10,4
+user100,5
+user20,5
+user1,6
+user1,7
+occhiato,7
+gigi,8
+frate,3

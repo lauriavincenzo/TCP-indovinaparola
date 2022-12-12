@@ -26,13 +26,16 @@ public class Indovina {
     String parola;
     int contamosse;
     boolean temp;
-
+    
+    
+            
     public Indovina() {
         contamosse=0;
         temp=false;
         String filename = "parole.txt";
         String pathToFile = Paths.get(filename).toAbsolutePath().toString();
         BufferedReader br;
+        
 
         try {
             System.out.println("try");
@@ -63,10 +66,11 @@ public class Indovina {
         //client ha inserito un carattere
         if (parolainserita.length() == 1) {
             char carattere = parolainserita.charAt(0);
+            contamosse++;
             //client ha inserito un carattere
             if (parola.contains(parolainserita)) {
                 System.out.println("bravo, hai indovinato una lettera");
-                contamosse++;
+                
                 for (int i = 0; i < parola.length(); i++) {
                     if (parola.charAt(i) == carattere) {
 
@@ -78,9 +82,10 @@ public class Indovina {
                 }
                 //if per controllare se il client indovina la parola carattere per carattere
                 if (parola.equals(attuale)) {
+                    
                     System.out.println("Hai vinto");
                     attuale = parola;
-                    contamosse++;
+                    
                     temp=true;
                 }
             } else {
@@ -106,7 +111,7 @@ public class Indovina {
                 //controllo se la parola inserita dall'utente contenga qualche carattere della parola da indovinare
             }
         }
-
+        
         return attuale;
     }
 
