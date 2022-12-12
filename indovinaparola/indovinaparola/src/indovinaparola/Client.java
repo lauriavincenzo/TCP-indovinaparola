@@ -60,7 +60,8 @@ public class Client {
                         String msg = input.readUTF();
                         log(msg);
                     }catch(IOException ex){
-                        log("readMessageThread : " + ex.getMessage());
+//                        log("readMessageThread : " + ex.getMessage());
+                        return;
                     }
                 }
             }
@@ -86,6 +87,8 @@ public class Client {
         });
         sendMessage.start();
     }
+    
+    
     private void log(String msg){
         //System.out.println(msg);
         

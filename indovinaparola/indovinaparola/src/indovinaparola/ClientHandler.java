@@ -22,6 +22,7 @@ public class ClientHandler implements Runnable{
     boolean isLosggedIn;
     String ptemporanea="";
     Indovina indovina;
+    int mosse;
     
     private DataInputStream input;
     private DataOutputStream output;
@@ -46,6 +47,7 @@ public class ClientHandler implements Runnable{
         }catch(IOException ex){
             log("ClientHander : " + ex.getMessage());
         }
+        mosse=indovina.getContamosse();
     }
     @Override
     public void run() {
@@ -58,8 +60,8 @@ public class ClientHandler implements Runnable{
         }
         write(output, "Client attivi : " + tmp+"\n"+"Premi invio per iniziare...");
         while(true){
-            received = read();
-            if(received.equalsIgnoreCase(Constants.LOGOUT)){
+            received =read();
+           if(received.equalsIgnoreCase(Constants.LOGOUT)){
                 this.isLosggedIn = false;
                 closeSocket();
                 closeStreams();
@@ -73,7 +75,7 @@ public class ClientHandler implements Runnable{
     
     private void forwardToClient(String parolainserita){
         // username # message
-//        StringTokenizer tokenizer = new StringTokenizer(received, "#");
+//        StringTokenizer tokenizer = new StringTokenizer(received);
 //        String recipient = tokenizer.nextToken().trim();
 //        String message = tokenizer.nextToken().trim();
 
@@ -82,25 +84,49 @@ public class ClientHandler implements Runnable{
         ptemporanea=indovina.controllaparola(ptemporanea, parolainserita);
         if(!(ptemporanea.contains("*"))&&(!(parolainserita.equals("jolly"))))
         {            
-            ptemporanea+=" era la parola da indovinare. Hai vinto utilizzando "+indovina.getContamosse()+" mosse";
+            ptemporanea+=" era la parola da indovinare.Hai vinto utilizzando "+indovina.getContamosse()+" mosse";
+            for(ClientHandler c : Server.getClients()){
+            if(this!=c){
+                c.creaclassifica();
+                write(c.output,name+" ha vinto");
+                c.closeSocket();
+                c.closeStreams();
+            }
+            }
         }else if(parolainserita.equals("jolly")){
             ptemporanea+=" era la parola da indovinare.Hai vinto utilizzando il jolly ";
         }
         
         
-        for(ClientHandler c : Server.getClients()){
-            if(c.isLosggedIn){
-                write(c.output,ptemporanea);
+//        for(ClientHandler c : Server.getClients()){
+//            if(c.isLosggedIn){
+                write(this.output,ptemporanea);
                log(parolainserita);
-            }
-        }
+//            }
+//        }
+        
+    }
+    //metodo che invia il nome e numero tentativi al main
+    public int getnumerotentativi()
+    {
+        return mosse;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    
+    public void creaclassifica()
+    {
+        Server.nmosse.add(mosse);
+        Server.nomiutenti.add(name);
         
     }
     
     private String read(){
         String line = "";
         try {
-            line = input.readUTF();
+           line = input.readUTF();
         } catch (IOException ex) {
             log("read : " + ex.getMessage());
         }

@@ -34,6 +34,8 @@ public class Server {
     Socket socket;
     static String p="";
     Indovina indovina;
+    static public  List<String> nomiutenti;
+    static public List<Integer> nmosse;
     
     
     public Server(){
@@ -45,6 +47,8 @@ public class Server {
         }      
         
         indovina=new Indovina();
+        nomiutenti=new ArrayList<>();
+        nmosse=new ArrayList<>();
         
     }
         
@@ -52,6 +56,10 @@ public class Server {
     public static void main(String[] args){
         Server server = new Server();
         server.watiConnection();
+        
+        
+        //crei lista con nome e punteggio
+        
     }
     
     private void watiConnection(){
